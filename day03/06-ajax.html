@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06-ajax.html</title>
+    <style>
+        img {
+            height: 180px;
+        }
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            width: 900px;
+            margin: auto;
+        }
+        td, th {
+            padding: 10px;
+            border: 1px solid grey;
+        }
+        thead {
+            background-color: #dadada;
+        }
+        td {
+            width: 86px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>06-ajax.html</h1>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>그림</th>
+                <th>이름</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const tbody = document.querySelector('tbody')
+        const url = 'http://192.168.112.7:8080/day11/zzanggu'
+
+        fetch(url)
+        .then(resp => resp.json())
+        .then(json => {
+            let tag = ''
+
+            json.forEach(element => {
+
+                tag += '<tr>'
+                tag += `    <td><img src="image/${element.img}"></td>`
+                tag += `    <td>${element.name}</td>`
+                tag += '</tr>'
+            })
+            
+            tbody.innerHTML += tag
+        })
+    </script>
+</body>
+</html>

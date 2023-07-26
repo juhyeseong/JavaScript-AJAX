@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-event.html</title>
+</head>
+<body>
+    <h1>02-event.html</h1>
+    <hr>
+
+    <h3>다중 요소에 이벤트 부여하기</h3>
+
+    <div id="image">
+        <img id="img" src="" height="200">
+    </div>
+
+    <div id="btns">
+        <button class="btn" image="image/강호동.jpg">강호동</button>
+        <button class="btn" image="image/단비.jpg">단비</button>
+        <button class="btn" image="image/루피.jpg">루피</button>
+        <button class="btn" image="image/사쿠라.jpg">사쿠라</button>
+        <button class="btn" image="image/짱아.jpg">짱아</button>
+        <button class="btn" image="image/청하.jpg">청하</button>
+    </div>
+
+    <script>
+        const btnList = document.querySelectorAll('.btn')
+        console.log(btnList)
+
+        // 이벤트 핸들러(하나)
+        // 이벤트 핸들러 내부에서 이벤트 대상을 구분하기 위해서 매개변수 event를 받는다
+        function btnHandler() {
+            console.log(event.target)
+            const image = event.target.getAttribute('image')
+            console.log(image)
+
+            const img = document.getElementById('img')
+            img.src = image
+        }
+
+        // 여러 요소에 같은 함수를 연결하기
+        btnList.forEach(btn => btn.onclick = btnHandler)
+    </script>
+</body>
+</html>

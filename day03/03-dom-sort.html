@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-dom-sort.html</title>
+    <style>
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 10px;
+            border: 1px solid grey;
+        }
+        thead {
+            background-color: #dadada;
+        }
+        thead > tr > th:nth-child(1):hover {
+            cursor: pointer;
+            background-color: skyblue;
+            color: white;
+        }
+        thead > tr > th:nth-child(2):hover {
+            cursor: pointer;
+            background-color: skyblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>03-dom-sort.html</h1>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>강호동</td>
+                <td>53</td>
+            </tr>
+            <tr>
+                <td>루피</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>청하</td>
+                <td>27</td>
+            </tr>
+            <tr>
+                <td>단비</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>짱아</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>사쿠라</td>
+                <td>25</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const ageTh = document.querySelector('thead > tr > th:nth-child(2)')
+        const nameTh = document.querySelector('thead > tr > th:nth-child(1)')
+
+        function sortByAge(){
+            // 테이블에 저장된 데이터를 나이 오름차순으로 정렬하기
+
+            // 1) 정렬대상이 되는 문서 요소를 불러온다
+            // 여기서는 tbody의 자손 tr
+            const trList = document.querySelectorAll('tbody > tr')
+            
+            // 2) 정렬하기 위해서는 sort함수가 필요하지만 
+            // querySelectorAll() 함수는 NodeList 형태로 반환하고 
+            // NodeList 에는 forEach 함수만 있고 sort 함수는 없다
+            // 따라서 , sort 함수를 사용할 수 있는 Array 타입으로 바꿔야 한다
+            const trArray = Array.from(trList)
+
+            // 3) Array 를 이용하여 sort 함수를 수행한다
+            trArray.sort((a,b) => {
+                //나이를 불러와서 숫자 형식으로 비교해야 함
+                const ageA = +a.querySelector('td:nth-child(2)').innerText
+                const ageB = +b.querySelector('td:nth-child(2)').innerText
+
+                return ageA > ageB ? 1 : -1
+                
+            })
+
+            // 4) 자바 스크립트 내부에서는 정렬이 되어 있으나, 문서에 반영되지 않는다
+            // appenChild 는 대상요소가 문서에 없으면 아래에 추가한다
+            // 대상 요소가 이미 문서에 있던 요소이면, 기존 요소를 빼서 맨 아래로 돌린다
+            const tbody = document.querySelector('tbody')
+            trArray.forEach(tr => tbody.appendChild(tr))
+        }
+
+        function sortByName() {
+            const trArray = Array.from(document.querySelectorAll('tbody > tr'))
+
+            trArray.sort((a, b) => {
+                const nameA = a.querySelector('td').innerText
+                const nameB = b.querySelector('td').innerText
+
+                return nameA > nameB ? 1 : -1
+            })
+
+            const tbody = document.querySelector('tbody')
+            trArray.forEach(tr => tbody.appendChild(tr))
+        }
+        
+        ageTh.onclick = sortByAge
+        nameTh.onclick = sortByName
+    </script>
+</body>
+</html>

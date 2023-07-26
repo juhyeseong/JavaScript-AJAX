@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05-weather.html</title>
+    <style>
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 10px;
+            border: 1px solid grey;
+        }
+        thead {
+            background-color: #dadada;
+        }
+        td {
+            width: 86px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>05-weather.html</h1>
+    <hr>
+
+    <table>
+        <thead>
+            <tr></tr>
+            <tr></tr>
+        </thead>
+        <tbody>
+            <tr></tr>
+        </tbody>
+    </table>
+
+    <script src="weather_20230726.js"></script>
+    <script>
+        const thead = document.querySelector('thead')
+        const tbody = document.querySelector('tbody')
+
+        let index = 1;
+        arr.forEach(element => {
+            let theadDate = ''
+            let theadAmPm = ''
+            let tbodyTag = ''
+            const dateArr = element.date.split(' ')
+
+            if(dateArr.length != 1) {
+                theadDate += dateArr[1] == '오전' ? `  <th colspan="2">${dateArr[0]}</th>` : ''
+                theadAmPm += `  <th>${dateArr[1]}</th>`
+                tbodyTag += `   <td>${element.weather}<br>${element.rainPercent}</td>`
+            }
+            else {
+                theadDate += `  <th rowspan="2">${dateArr[0]}</th>`
+                tbodyTag += `   <td>${element.weather}<br>${element.rainPercent}</td>`
+            }
+            
+            thead.querySelector('tr').innerHTML += theadDate
+            thead.querySelector('tr:nth-child(2)').innerHTML += theadAmPm
+            tbody.querySelector('tr').innerHTML += tbodyTag
+            index++
+        })
+    </script>
+</body>
+</html>

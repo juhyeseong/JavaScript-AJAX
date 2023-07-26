@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-sort.html</title>
+    <style>
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 10px;
+            border: 1px solid grey;
+            min-width: 80px;
+        }
+        thead {
+            background-color: #dadada;
+        }
+        thead > tr > th:nth-child(1):hover {
+            cursor: pointer;
+            background-color: skyblue;
+            color: white;
+        }
+        thead > tr > th:nth-child(2):hover {
+            cursor: pointer;
+            background-color: skyblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>04-sort.html</h1>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="name" order="1">이름<span></span></th>
+                <th class="age" order="1">나이<span></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="name">강호동</td>
+                <td class="age">53</td>
+            </tr>
+            <tr>
+                <td class="name">루피</td>
+                <td class="age">8</td>
+            </tr>
+            <tr>
+                <td class="name">청하</td>
+                <td class="age">27</td>
+            </tr>
+            <tr>
+                <td class="name">단비</td>
+                <td class="age">25</td>
+            </tr>
+            <tr>
+                <td class="name">짱아</td>
+                <td class="age">1</td>
+            </tr>
+            <tr>
+                <td class="name">사쿠라</td>
+                <td class="age">25</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const thList = document.querySelectorAll('th')
+        function sortHandler(event){
+            let target  = event.target
+            while(target.tagName != 'TH'){
+                target = target.parentNode
+            }
+           
+            const className = target.className
+            console.log(className)
+
+            const order = +event.target.getAttribute('order')    //1을 불러왔다면
+            event.target.setAttribute('order', -order)            //-1을 넣어준다
+            
+             // 모든 span의 내용을 제거하고
+             document.querySelectorAll('span').forEach(span => span.innerText = '')
+            
+            //if(event.target.tagName == 'SPAN'){
+            // event.target.innerText=''
+                
+            // 클릭한 대상의 span에는 order에 따라서 서로 다른 모양의 삼각형을 넣어준다
+            target.querySelector('span').innerText = order > 0 ? '🔼' : '🔽'
+        
+            const trArray = Array.from(document.querySelectorAll('tbody > tr'))
+            const tbody = document.querySelector('tbody')
+
+            trArray.sort((a,b) =>{
+                let valueA = a.querySelector('.' + className).innerText
+                let valueB = b.querySelector('.'+ className).innerText
+                console.log(isNaN(valueA))
+                if(isNaN(valueA) == false ){
+                    valueA = +valueA
+                    valueB = +valueB
+                }
+                let result = valueA > valueB ? 1:-1
+                return result * order
+            })
+            trArray.forEach(tr => tbody.appendChild(tr))
+        }
+        thList.forEach(th => th.onclick = sortHandler)
+    </script>
+</body>
+</html>

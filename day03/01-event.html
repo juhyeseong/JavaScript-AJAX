@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-event.html</title>
+</head>
+<body>
+    <h1>01-event.html</h1>
+    <hr>
+
+    <h3>문서 요소에 대해 어떤 특정 작동이 발생되었을 때, 별도의 함수를 수행하는 과정</h3>
+    <ul>
+        <li>event.target : 이벤트의 대상이 되는 특정 문서 요소</li>
+        <li>event listener : 어떤 종류의 이벤트가 발생하는지 감지하는 요소</li>
+        <li>event handler : 이벤트가 발생하면 어떻게 처리를 수행할지 작성하는 함수</li>
+    </ul>
+
+    <div>
+        <button id="btn1">버튼1</button>
+        <button id="btn2" onclick="alert('버튼2 클릭')">버튼2</button>
+        <button id="btn3">버튼3</button>
+    </div>
+
+    <script>
+        // 이벤트를 연결할 문서 요소 대상을 불러온다
+        const btn1 = document.getElementById('btn1')
+
+        // 이벤트가 발생하면 수행할 내용을 함수에 작성한다(이벤트 핸들러)
+        function btn1Handler() {
+            alert('버튼1 클릭')
+        }
+
+        // 특정 종류의 이벤트를 지정하고, 아벤트 대상에 이벤트 핸들러를 연결
+        // btn1.onclick = btn1Handler
+        btn1.addEventListener('click', btn1Handler)
+
+        // 문서요소 + 화살표함수 이벤트 처리
+        document.getElementById('btn3').onclick = () => alert('버튼3 클릭')
+    </script>
+</body>
+</html>
