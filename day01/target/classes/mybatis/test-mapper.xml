@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itbank.repository.Ex03DAO">
+	<select id="selectAll" resultType="youtube">
+		select * from youtube_list
+			order by idx desc
+	</select>
+	
+	<select id="selectIframe" parameterType="string" resultType="string">
+		select iframe from youtube_list
+			where title=#{title}
+	</select>
+</mapper>
