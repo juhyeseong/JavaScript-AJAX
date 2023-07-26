@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-array.html</title>
+</head>
+<body>
+    <h1>04-array.html</h1>
+    <hr>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>함수</th>
+            <th>콜백함수의 인자</th>
+            <th>콜백함수의 반환형</th>
+            <th>기능</th>
+        </tr>
+        <tr>
+            <td>array.forEach</td>
+            <td>배열 내부 객체 하나</td>
+            <td>void</td>
+            <td>
+                제어문 for와 거의 동일하다.<br>
+                배열 내 요소들을 반복처리한다
+            </td>
+        </tr>
+        <tr>
+            <td>arry.sort</td>
+            <td>배열 내부 객체 둘</td>
+            <td>number</td>
+            <td>
+                두 객체를 비교하여 결과를 숫자로 반환<br>
+                반환값에 따라서 자리교체를 수행한다
+            </td>
+        </tr>
+        <tr>
+            <td>array.filter</td>
+            <td>배열 내부 객체 하나</td>
+            <td>boolean</td>
+            <td>
+                반환값에 따라 해당 객체를 새로운 배열에 포함시킬지 결정한다
+            </td>
+        </tr>
+        <tr>
+            <td>array.map</td>
+            <td>배열 내부 객체 하나</td>
+            <td>object</td>
+            <td>반환값으로 새로운 배열을 구성한다</td>
+        </tr>
+    </table>
+
+    <script>
+        // 객체타입의 배열(스크립트에서는 배열이 [] 를 이용한다)
+        const arr = [
+            {name: '이지은', age: 31, gender: '여성'},
+            {name: '홍진호', age: 42, gender: '남성'},
+            {name: '나단비', age: 5, gender: '여성'},
+            {name: '신짱구', age: 6, gender: '남성'},
+            {name: '김지수', age: 28, gender: '여성'}
+        ]
+        console.log(arr)
+        // 1) 배열에서 여성만 뽑아서 새로운 배열을 구성하기(길이 감소, 필터)
+        const arr1 = arr.filter(ob => ob.gender == '여성')
+        console.log(arr1)
+
+        // 2) 배열에서 이름과 성인/미성년자 여부만으로 새로 구성하기
+        // (구성요소 변경)
+        // const arr2 = arr.map(ob => ob.age >= 20 ? '성인' : '미성년자')
+        const arr2 = arr.map(ob => ob.name)
+        console.log('arr2 : ', arr2)
+
+        // 3) 배열을 나이순으로 오름차순 정렬하기
+        arr.sort((a, b) => a.age > b.age ? 1 : -1)
+
+        // 4) 배열의 각 요소를 순서대로 처리하기
+        arr.forEach(ob => console.log(ob.name + '님은 ' + ob.age + ' 살 입니다'))
+    </script>
+</body>
+</html>

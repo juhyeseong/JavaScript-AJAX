@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07-json.html</title>
+</head>
+<body>
+    <h1>json : javascript object notation</h1>
+    <hr>
+
+    <h3>자바스크립트 객체를 형식에 맞게 문자열로 변환한다</h3>
+
+    <script>
+        const arr = [
+            {name: '이지은', age: 31},
+            {name: '홍진호', age: 42},
+            {name: '나단비', age: 5}
+        ]
+        const jsonString = JSON.stringify(arr)
+
+        const jsonObject = JSON.parse(jsonString)
+
+        console.log(arr)
+        console.log(jsonString)
+        console.log(jsonObject)
+    </script>
+</body>
+</html>
