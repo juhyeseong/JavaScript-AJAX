@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-async-await.html</title>
+</head>
+<body>
+
+    <h1>04-async-await.html</h1>
+    <hr>
+
+    <div id="root"></div>
+
+    <script>
+        async function test() {
+            const url = 'https://apis.data.go.kr/6260000/FoodService/getFoodKr?serviceKey=K7G5hCA%2FRqnmALDK%2F7POZXDGSgTgQFRIcOqpF8HUf9rqLn17QSaJ4Q0Ox732h%2BF%2FgxuyB3bXrdEWApNVwrOtWA%3D%3D&pageNo=1&numOfRows=10&resultType=json'
+            // ajax 요청한 결과 데이터에서 각 식당의 이름만(title) root에 순서대로 추가하세요
+
+            const promise = fetch(url)
+                .then(resp => resp.json())
+                .then(json => {
+                    const arr = json.getFoodKr.item
+                    return arr
+                })
+            console.log(promise)
+            // promise.then(ob => console.log(ob))
+
+            const arr = await fetch(url)
+                .then(resp => resp.json())
+                .then(json => {
+                    const arr = json.getFoodKr.item
+                    return arr
+                })
+            console.log(arr)
+        }
+
+        window.onload = test
+    </script>
+    
+</body>
+</html>
